@@ -2,12 +2,21 @@ image: gitpod/workspace-full
 
 tasks:
   - init: |
-      composer create-project --prefer-dist laravel/laravel .
+      # Install Laravel if the 'laravel' directory does not exist
+      if [ ! -d "laravel" ]; then
+        composer create-project --prefer-dist laravel/laravel laravel
+      fi
       cd laravel
+      # Copy .env example and generate application key
       cp .env.example .env
       php artisan key:generate
+      cd ..
+      # Bring up Docker services
       docker-compose up -d
   - command: |
+      # Wait for Docker services to be up
+      sleep 10
+      # Run Laravel migrations
       docker-compose exec app php artisan migrate
 
 ports:
