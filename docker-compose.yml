@@ -1,4 +1,4 @@
-version: '3.8'  # Update the version to the latest supported
+version: '3.8'
 
 services:
   app:
@@ -7,3 +7,4 @@ services:
       - "8000:8000"
     volumes:
       - .:/var/www/html
+    command: php artisan serve --host=0.0.0.0 --port=8000
