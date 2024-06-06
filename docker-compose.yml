@@ -1,4 +1,4 @@
-version: '3.1'
+version: '3.8'  # Update the version to the latest supported
 
 services:
   app:
